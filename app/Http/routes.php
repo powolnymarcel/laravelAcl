@@ -35,13 +35,13 @@ Route::get('/acces_non_autorise', function () {
         'uses' => 'AppController@getAuthorPage',
         'as' => 'author',
         'middleware' => 'roles',
-        'roles' => ['Admin', 'Author']
+        'roles' => ['Admin', 'Auteur']
     ]);
     Route::get('/author/generate-article', [
         'uses' => 'AppController@getGenerateArticle',
         'as' => 'author.article',
         'middleware' => 'roles',
-        'roles' => ['Author','Admin']
+        'roles' => ['Auteur','Admin']
     ]);
     Route::get('/admin', [
         'uses' => 'AppController@getAdminPage',
