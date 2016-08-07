@@ -26,17 +26,20 @@ class AppController extends Controller
 
     public function postAdminAssignRoles(Request $request)
     {
-        $user = User::where('email', $request['email'])->first();
-        $user->roles()->detach();
-        if ($request['role_user']) {
-            $user->roles()->attach(Role::where('name', 'Utilisateur')->first());
+        foreach ($request['email'] as $email) {
+            $user = User::where('email', $email)->first();
+            $user->roles()->detach();
+            if ($request['role_user']) {
+                $user->roles()->attach(Role::where('name', 'Utilisateur')->first());
+            }
+            if ($request['role_author']) {
+                $user->roles()->attach(Role::where('name', 'Auteur')->first());
+            }
+            if ($request['role_admin']) {
+                $user->roles()->attach(Role::where('name', 'Admin')->first());
+            }
         }
-        if ($request['role_author']) {
-            $user->roles()->attach(Role::where('name', 'Auteur')->first());
-        }
-        if ($request['role_admin']) {
-            $user->roles()->attach(Role::where('name', 'Admin')->first());
-        }
+
         return redirect()->back();
     }
 }
