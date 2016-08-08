@@ -75,3 +75,11 @@ Route::get('/acces_non_autorise', function () {
         'uses' => 'AuthController@getLogout',
         'as' => 'logout'
     ]);
+
+Route::group(['middleware' => ['admin']], function () {
+
+    Route::get('/test', [
+        'uses' => 'TestController@index',
+        'as' => 'test'
+    ]);
+});

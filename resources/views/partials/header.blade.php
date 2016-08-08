@@ -4,6 +4,7 @@
             <li><a href="{{ route('main') }}">Accueil</a></li>
             <li><a href="{{ route('author') }}">Auteur</a></li>
             <li><a href="{{ route('admin') }}">Admin</a></li>
+            <li><a href="{{ route('test') }}">test</a></li>
             <span id="separator"></span>
             @if(!Auth::check())
                 <li><a href="{{ route('signup') }}">Inscription</a></li>

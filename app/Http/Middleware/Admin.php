@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Middleware;
 use Closure;
-class CheckRole
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -13,11 +13,9 @@ class CheckRole
     public function handle($request, Closure $next)
     {
         if ($request->user() === null) {
-                return  redirect()->route('acces_non_autorise');
+            return  redirect()->route('acces_non_autorise');
         }
-        $actions = $request->route()->getAction();
-        $roles = isset($actions['roles']) ? $actions['roles'] : null;
-        if ($request->user()->aUnRole($roles) || !$roles) {
+        if ($request->user()->aUnRole('Admin')) {
             return $next($request);
         }
         return  redirect()->route('acces_non_autorise');
